@@ -45,6 +45,21 @@ return [
             'driver' => 'token',
             'provider' => 'users',
         ],
+
+        'web_admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
+
+        'web_gudang' => [
+            'driver' => 'session',
+            'provider' => 'gudang',
+        ],
+
+        'web_kasir' => [
+            'driver' => 'session',
+            'provider' => 'kasir',
+        ],
     ],
 
     /*
@@ -74,6 +89,22 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
+
+        //Adin user provider
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
+
+        'gudang' => [
+            'driver' => 'eloquent',
+            'model' => App\Gudang::class,
+        ],
+
+        'kasir' => [
+            'driver' => 'eloquent',
+            'model' => App\Kasir::class,
+        ],
     ],
 
     /*
