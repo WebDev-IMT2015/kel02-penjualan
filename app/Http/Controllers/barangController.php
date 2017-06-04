@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\barang;
+use App\invoice;
 
 class barangController extends Controller
 {
@@ -45,6 +46,19 @@ class barangController extends Controller
     }
 
     public function jual(Request $request){
-
+        $kodeinvoice = $request->input('kodeinvoice');
+        $nama = $request->input('namacust');
+        $tanggal = $request->input('tanggal');
+        $kodebarang = $request->input('kodebarang');
+        $jumlah = $request->input('jumlah');
+        $invoice = new invoice;
+        $invoice->kodeinvoice = $kodeinvoice;
+        $invoice->nama = $nama;
+        $invoice->tanggal = $tanggal;
+        $invoice->kodebarang = $kodebarang;
+        $invoice->jumlah = $jumlah;
+        $invoice->save();
+        
+        return view('kasir/penjualan');
     }
 }

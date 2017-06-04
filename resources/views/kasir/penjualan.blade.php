@@ -12,6 +12,9 @@
 					<h1>Penjualan</h1>
 					<form action="@if(isset($barangs)) {{ route('jual') }} @else {{ route('cek') }} @endif" method="post">
 						{{ csrf_field() }}
+						Kode Invoice:
+						<input type="text" class="form-control" name="kodeinvoice">
+						<br>
 						Nama Customer:
 						<input type="text" class="form-control" name="namacust">
 						<br>

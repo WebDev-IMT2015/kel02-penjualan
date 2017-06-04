@@ -28,10 +28,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('inputbarang', 'barangController@store');
-<<<<<<< HEAD
 Route::post('penjualan/cek', 'barangController@cek')->name('cek');
-Route::post('penjualan', 'barangController@update')->name('jual');
-=======
+Route::post('penjualan', 'barangController@jual')->name('jual');
 
 // admin
 Route::get('admin_register', 'AdminAuth\RegisterController@showRegistrationForm');
@@ -125,4 +123,3 @@ Route::group(['middleware' => 'kasir_auth'], function(){
 	});
 
 });
->>>>>>> e79e158a039eb590f2202d7b0279a57849253eb7

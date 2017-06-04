@@ -13,7 +13,15 @@ class CreateInvoiceTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('invoice', function (Blueprint $table) {
+            $table->string('kodeinvoice');
+            $table->string('nama');
+            $table->date('tanggal');
+            $table->string('kodebarang');
+            $table->integer('jumlah');
+            $table->timestamps();
+            $table->foreign('kodebarang')->references('kodebarang')->on('barang');
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ class CreateInvoiceTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('invoice');
     }
 }
