@@ -14,7 +14,7 @@ class barangController extends Controller
     }
 
 
-public function store(Request $request)
+	public function store(Request $request)
     {
         $kodebarang = $request->input('kodebarang');
         $nama = $request->input('nama');
@@ -28,5 +28,23 @@ public function store(Request $request)
         $barang->save();
         
         return redirect('inputbarang');
+    }
+
+    public function cek(Request $request)
+    {
+    	$barang = barang::all();
+        $kodebarang = $request->input('kodebarang');
+        $barangs = barang::where('kodebarang', $kodebarang)->first();
+        if ($barangs!=null) {
+        	return view('kasir/penjualan')->with('barangs', $barangs);
+        }
+        else {
+        	$salah = 1;
+        	return view('kasir/penjualan')->with('salah', $salah);
+        }
+    }
+
+    public function jual(Request $request){
+
     }
 }

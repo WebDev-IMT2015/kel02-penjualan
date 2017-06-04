@@ -19,8 +19,14 @@ Route::get('inputbarang', function () {
     return view('admin/inputbarang');
 });
 
+Route::get('penjualan', function () {
+    return view('kasir/penjualan');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('inputbarang', 'barangController@store');
+Route::post('penjualan/cek', 'barangController@cek')->name('cek');
+Route::post('penjualan', 'barangController@update')->name('jual');
