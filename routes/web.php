@@ -15,6 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('adminLogin', function () {
+    return view('admin/auth/login');
+});
+
+Route::get('gudangLogin', function () {
+    return view('gudang/auth/login');
+});
+
+Route::get('kasirLogin', function () {
+    return view('kasir/auth/login');
+});
+
 Route::get('inputbarang', function () {
   return view('admin/inputbarang');
 });
