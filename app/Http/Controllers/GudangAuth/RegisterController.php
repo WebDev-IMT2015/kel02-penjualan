@@ -2,45 +2,50 @@
 
 namespace App\Http\Controllers\GudangAuth;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-
-//Validator facade used in validator method
-use Illuminate\Support\Facades\Validator;
-
-//Seller Model
 use App\Gudang;
-
-//Auth Facade used in guard
-use Auth;
+use Validator;
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
-	protected $redirectPath = 'gudang_home';
+    /*
+    |--------------------------------------------------------------------------
+    | Register Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles the registration of new users as well as their
+    | validation and creation. By default this controller uses a trait to
+    | provide this functionality without requiring any additional code.
+    |
+    */
 
-    //shows registration form to gudang
-	public function showRegistrationForm()
-	{
-		return view('gudang.auth.register');
-	}
+    use RegistersUsers;
 
-	public function register(Request $request)
+    /**
+     * Where to redirect users after login / registration.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/gudang/home';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-
-       //Validates data
-        $this->validator($request->all())->validate();
-
-       //Create gudang
-        $gudang = $this->create($request->all());
-
-        //Authenticates gudang
-        $this->guard()->login($gudang);
-
-       //Redirects gudangs
-        return redirect($this->redirectPath);
+        $this->middleware('gudang.guest');
     }
 
-    //Validates user's Input
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -50,7 +55,12 @@ class RegisterController extends Controller
         ]);
     }
 
-    //Create a new seller instance after a validation.
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return Gudang
+     */
     protected function create(array $data)
     {
         return Gudang::create([
@@ -60,9 +70,23 @@ class RegisterController extends Controller
         ]);
     }
 
-    //Get the guard to authenticate Seller
-   	protected function guard()
-   	{
-       	return Auth::guard('web_gudang');
-  	}
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view('gudang.auth.register');
+    }
+
+    /**
+     * Get the guard to be used during registration.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard('gudang');
+    }
 }

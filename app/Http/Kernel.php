@@ -50,17 +50,17 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'gudang' => \App\Http\Middleware\RedirectIfNotGudang::class,
+        'gudang.guest' => \App\Http\Middleware\RedirectIfGudang::class,
+        'kasir' => \App\Http\Middleware\RedirectIfNotKasir::class,
+        'kasir.guest' => \App\Http\Middleware\RedirectIfKasir::class,
+        'admin' => \App\Http\Middleware\RedirectIfNotAdmin::class,
+        'admin.guest' => \App\Http\Middleware\RedirectIfAdmin::class,
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'admin_auth' => \App\Http\Middleware\AuthenticateAdmin::class,
-        'admin_guest' => \App\Http\Middleware\RedirectIfAdminAuthenticated::class,
-        'gudang_auth' => \App\Http\Middleware\AuthenticateGudang::class,
-        'gudang_guest' => \App\Http\Middleware\RedirectIfGudangAuthenticated::class,
-        'kasir_auth' => \App\Http\Middleware\AuthenticateKasir::class,
-        'kasir_guest' => \App\Http\Middleware\RedirectIfKasirAuthenticated::class,
     ];
 }

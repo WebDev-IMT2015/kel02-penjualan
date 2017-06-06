@@ -36,6 +36,21 @@ return [
     */
 
     'guards' => [
+        'gudang' => [
+            'driver' => 'session',
+            'provider' => 'gudangs',
+        ],
+
+        'kasir' => [
+            'driver' => 'session',
+            'provider' => 'kasirs',
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
+
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -44,21 +59,6 @@ return [
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
-        ],
-
-        'web_admin' => [
-            'driver' => 'session',
-            'provider' => 'admin',
-        ],
-
-        'web_gudang' => [
-            'driver' => 'session',
-            'provider' => 'gudang',
-        ],
-
-        'web_kasir' => [
-            'driver' => 'session',
-            'provider' => 'kasir',
         ],
     ],
 
@@ -80,6 +80,21 @@ return [
     */
 
     'providers' => [
+        'gudangs' => [
+            'driver' => 'eloquent',
+            'model' => App\Gudang::class,
+        ],
+
+        'kasirs' => [
+            'driver' => 'eloquent',
+            'model' => App\Kasir::class,
+        ],
+
+        'admins' => [
+            'driver' => 'eloquent',
+            'model' => App\Admin::class,
+        ],
+
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
@@ -89,22 +104,6 @@ return [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
-
-        //Adin user provider
-        'admin' => [
-            'driver' => 'eloquent',
-            'model' => App\Admin::class,
-        ],
-
-        'gudang' => [
-            'driver' => 'eloquent',
-            'model' => App\Gudang::class,
-        ],
-
-        'kasir' => [
-            'driver' => 'eloquent',
-            'model' => App\Kasir::class,
-        ],
     ],
 
     /*
@@ -123,6 +122,24 @@ return [
     */
 
     'passwords' => [
+        'gudangs' => [
+            'provider' => 'gudangs',
+            'table' => 'gudang_password_resets',
+            'expire' => 60,
+        ],
+
+        'kasirs' => [
+            'provider' => 'kasirs',
+            'table' => 'kasir_password_resets',
+            'expire' => 60,
+        ],
+
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'admin_password_resets',
+            'expire' => 60,
+        ],
+
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',

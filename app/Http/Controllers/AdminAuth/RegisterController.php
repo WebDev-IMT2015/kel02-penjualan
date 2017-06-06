@@ -2,45 +2,50 @@
 
 namespace App\Http\Controllers\AdminAuth;
 
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-
-//Validator facade used in validator method
-use Illuminate\Support\Facades\Validator;
-
-//Seller Model
 use App\Admin;
-
-//Auth Facade used in guard
-use Auth;
+use Validator;
+use App\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
-	protected $redirectPath = 'admin_home';
+    /*
+    |--------------------------------------------------------------------------
+    | Register Controller
+    |--------------------------------------------------------------------------
+    |
+    | This controller handles the registration of new users as well as their
+    | validation and creation. By default this controller uses a trait to
+    | provide this functionality without requiring any additional code.
+    |
+    */
 
-    //shows registration form to admin
-	public function showRegistrationForm()
-	{
-		return view('admin.auth.register');
-	}
+    use RegistersUsers;
 
-	public function register(Request $request)
+    /**
+     * Where to redirect users after login / registration.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/admin/home';
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-
-       //Validates data
-        $this->validator($request->all())->validate();
-
-       //Create admin
-        $admin = $this->create($request->all());
-
-        //Authenticates admin
-        $this->guard()->login($admin);
-
-       //Redirects admins
-        return redirect($this->redirectPath);
+        $this->middleware('admin.guest');
     }
 
-    //Validates user's Input
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -50,7 +55,12 @@ class RegisterController extends Controller
         ]);
     }
 
-    //Create a new seller instance after a validation.
+    /**
+     * Create a new user instance after a valid registration.
+     *
+     * @param  array  $data
+     * @return Admin
+     */
     protected function create(array $data)
     {
         return Admin::create([
@@ -60,9 +70,23 @@ class RegisterController extends Controller
         ]);
     }
 
-    //Get the guard to authenticate Seller
-   	protected function guard()
-   	{
-       	return Auth::guard('web_admin');
-  	}
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        return view('admin.auth.register');
+    }
+
+    /**
+     * Get the guard to be used during registration.
+     *
+     * @return \Illuminate\Contracts\Auth\StatefulGuard
+     */
+    protected function guard()
+    {
+        return Auth::guard('admin');
+    }
 }

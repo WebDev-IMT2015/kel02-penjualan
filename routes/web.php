@@ -12,114 +12,63 @@
 */
 
 Route::get('/', function () {
-	return view('welcome');
+    return view('welcome');
 });
 
 Route::get('inputbarang', function () {
-	return view('admin/inputbarang');
+  return view('admin/inputbarang');
 });
 
 Route::get('penjualan', function () {
     return view('kasir/penjualan');
 });
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::post('inputbarang', 'barangController@store');
 Route::post('penjualan/cek', 'barangController@cek')->name('cek');
 Route::post('penjualan', 'barangController@jual')->name('jual');
 
-// admin
-Route::get('admin_register', 'AdminAuth\RegisterController@showRegistrationForm');
-Route::post('admin_register', 'AdminAuth\RegisterController@register');
+Route::group(['prefix' => 'admin'], function () {
+  Route::get('/login', 'AdminAuth\LoginController@showLoginForm');
+  Route::post('/login', 'AdminAuth\LoginController@login');
+  Route::post('/logout', 'AdminAuth\LoginController@logout');
 
-Route::get('/admin_home', function(){
-	return view('admin.home');
+  Route::get('/register', 'AdminAuth\RegisterController@showRegistrationForm');
+  Route::post('/register', 'AdminAuth\RegisterController@register');
+
+  Route::post('/password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail');
+  Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset');
+  Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm');
+  Route::get('/password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm');
 });
 
-Route::post('admin_logout', 'AdminAuth\LoginController@logout');
-Route::get('admin_login', 'AdminAuth\LoginController@showLoginForm');
-Route::post('admin_login', 'AdminAuth\LoginController@login');
+Route::group(['prefix' => 'kasir'], function () {
+  Route::get('/login', 'KasirAuth\LoginController@showLoginForm');
+  Route::post('/login', 'KasirAuth\LoginController@login');
+  Route::post('/logout', 'KasirAuth\LoginController@logout');
 
-// gudang
-Route::get('gudang_register', 'GudangAuth\RegisterController@showRegistrationForm');
-Route::post('gudang_register', 'GudangAuth\RegisterController@register');
+  Route::get('/register', 'KasirAuth\RegisterController@showRegistrationForm');
+  Route::post('/register', 'KasirAuth\RegisterController@register');
 
-Route::get('/gudang_home', function(){
-	return view('gudang.home');
+  Route::post('/password/email', 'KasirAuth\ForgotPasswordController@sendResetLinkEmail');
+  Route::post('/password/reset', 'KasirAuth\ResetPasswordController@reset');
+  Route::get('/password/reset', 'KasirAuth\ForgotPasswordController@showLinkRequestForm');
+  Route::get('/password/reset/{token}', 'KasirAuth\ResetPasswordController@showResetForm');
 });
 
-Route::post('gudang_logout', 'GudangAuth\LoginController@logout');
-Route::get('gudang_login', 'GudangAuth\LoginController@showLoginForm');
-Route::post('gudang_login', 'GudangAuth\LoginController@login');
+Route::group(['prefix' => 'gudang'], function () {
+  Route::get('/login', 'GudangAuth\LoginController@showLoginForm');
+  Route::post('/login', 'GudangAuth\LoginController@login');
+  Route::post('/logout', 'GudangAuth\LoginController@logout');
 
-// kasir
-Route::get('kasir_register', 'KasirAuth\RegisterController@showRegistrationForm');
-Route::post('kasir_register', 'KasirAuth\RegisterController@register');
+  Route::get('/register', 'GudangAuth\RegisterController@showRegistrationForm');
+  Route::post('/register', 'GudangAuth\RegisterController@register');
 
-Route::get('/kasir_home', function(){
-	return view('kasir.home');
-});
-
-Route::post('kasir_logout', 'KasirAuth\LoginController@logout');
-Route::get('kasir_login', 'KasirAuth\LoginController@showLoginForm');
-Route::post('kasir_login', 'KasirAuth\LoginController@login');
-
-// middleware
-//Logged in users cannot access or send requests these pages
-Route::group(['middleware' => 'admin_guest'], function() {
-
-	Route::get('admin_register', 'AdminAuth\RegisterController@showRegistrationForm');
-	Route::post('admin_register', 'AdminAuth\RegisterController@register');
-	Route::get('admin_login', 'AdminAuth\LoginController@showLoginForm');
-	Route::post('admin_login', 'AdminAuth\LoginController@login');
-
-});
-
-Route::group(['middleware' => 'gudang_guest'], function() {
-
-	Route::get('gudang_register', 'GudangAuth\RegisterController@showRegistrationForm');
-	Route::post('gudang_register', 'GudangAuth\RegisterController@register');
-	Route::get('gudang_login', 'GudangAuth\LoginController@showLoginForm');
-	Route::post('gudang_login', 'GudangAuth\LoginController@login');
-
-});
-
-Route::group(['middleware' => 'kasir_guest'], function() {
-
-	Route::get('kasir_register', 'KasirAuth\RegisterController@showRegistrationForm');
-	Route::post('kasir_register', 'KasirAuth\RegisterController@register');
-	Route::get('kasir_login', 'KasirAuth\LoginController@showLoginForm');
-	Route::post('kasir_login', 'KasirAuth\LoginController@login');
-
-});
-
-//Only logged in users can access or send requests to these pages
-Route::group(['middleware' => 'admin_auth'], function(){
-
-	Route::post('admin_logout', 'AdminAuth\LoginController@logout');
-	Route::get('/admin_home', function(){
-		return view('admin.home');
-	});
-
-});
-
-Route::group(['middleware' => 'gudang_auth'], function(){
-
-	Route::post('gudang_logout', 'GudangAuth\LoginController@logout');
-	Route::get('/gudang_home', function(){
-		return view('gudang.home');
-	});
-
-});
-
-Route::group(['middleware' => 'kasir_auth'], function(){
-
-	Route::post('kasir_logout', 'KasirAuth\LoginController@logout');
-	Route::get('/kasir_home', function(){
-		return view('kasir.home');
-	});
-
+  Route::post('/password/email', 'GudangAuth\ForgotPasswordController@sendResetLinkEmail');
+  Route::post('/password/reset', 'GudangAuth\ResetPasswordController@reset');
+  Route::get('/password/reset', 'GudangAuth\ForgotPasswordController@showLinkRequestForm');
+  Route::get('/password/reset/{token}', 'GudangAuth\ResetPasswordController@showResetForm');
 });

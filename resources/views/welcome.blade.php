@@ -1,18 +1,14 @@
 <!doctype html>
-<html lang="{{ config('app.locale') }}">
+<html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>RRH</title>
+        <title>Laravel</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-
-        <!-- Bootstrap -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.css') }}">
 
         <!-- Styles -->
         <style>
@@ -66,11 +62,6 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
-
-            a.loginButton {
-                color: #fff;
-                font-size: 2em;
-            }
         </style>
     </head>
     <body>
@@ -88,18 +79,15 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    RRH
-                    <br>
-                    <p style="font-size: 0.3em;">Raka &nbsp|&nbsp Rahman &nbsp|&nbsp Hans</p>
+                    Laravel
                 </div>
 
                 <div class="links">
-                    <a href="{{ url('/login') }}" class="btn btn-warning btn-lg loginButton">Login!</a>
-                    {{-- <a href="https://laravel.com/docs">Documentation</a>
+                    <a href="https://laravel.com/docs">Documentation</a>
                     <a href="https://laracasts.com">Laracasts</a>
                     <a href="https://laravel-news.com">News</a>
                     <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a> --}}
+                    <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
             </div>
         </div>
