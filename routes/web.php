@@ -23,10 +23,15 @@ Route::get('inputbarang', function () {
 	return view('admin/inputbarang');
 });
 
+Route::get('barangmasuk', function () {
+	return view('gudang/barangmasuk');
+});
+
 Route::get('penjualan', function () {
 	return view('kasir/penjualan');
 });
 
 Route::post('inputbarang', 'barangController@store');
+Route::post('barangmasuk', 'barangController@addStock');
 Route::post('penjualan/cek', 'barangController@cek')->name('cek');
 Route::post('penjualan', 'barangController@jual')->name('jual');

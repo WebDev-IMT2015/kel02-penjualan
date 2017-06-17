@@ -9,20 +9,20 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">
+					@if(@isset($error))
+						{{ $error }}
+					@endif
 					<h1>Input Barang</h1>
-					<form action="inputbarang" method="post">
+					<form action="barangmasuk" method="post">
 						{{ csrf_field() }}
 						Kode barang:
 						<input type="text" class="form-control" name="kodebarang">
 						<br>
-						Nama:
-						<input type="text" class="form-control" name="nama">
-						<br>
 						Jumlah:
-						<input type="text" class="form-control" name="jumlah">
+						<input type="number" class="form-control" name="jumlah">
 						<br>
-						Harga Satuan:
-						<input type="text" class="form-control" name="harga">
+						Keterangan:
+						<input type="text" class="form-control" name="keterangan">
 						<br>
 						<br>
 						<button type ="submit" class="btn btn-success">Simpan</button>

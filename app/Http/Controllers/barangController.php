@@ -15,7 +15,7 @@ class barangController extends Controller
     }
 
 
-	public function store(Request $request)
+    public function store(Request $request)
     {
         $kodebarang = $request->input('kodebarang');
         $nama = $request->input('nama');
@@ -29,6 +29,30 @@ class barangController extends Controller
         $barang->save();
         
         return redirect('inputbarang');
+    }
+
+    public function addStock(Request $request)
+    {
+        if ($request->jumlah<=0) {
+            $errorMessage = 'Error. Jumlah barang yang diinputkan negatif. Mohon memasukkan jumlah barang masuk positif.';
+            return view('gudang/barangmasuk')->with('error', $errorMessage);
+        }
+
+        $barang = barang::all();
+        $kodebarang = $request->input('kodebarang');
+        $barangs = barang::where('kodebarang', $kodebarang)->first();
+        if ($barangs!=null) {
+            //tambah stock
+            $barangs->jumlah = $barangs->jumlah + $request->input('jumlah');
+            $barangs->save();
+            //masukin ke database barangmasuk
+            //insert code here...
+            return view('gudang/barangmasuk');
+        }
+        else {
+            $salah = "Kode barang tidak ditemukan.";
+            return view('gudang/barangmasuk')->with('salah', $salah);
+        }
     }
 
     public function cek(Request $request)
