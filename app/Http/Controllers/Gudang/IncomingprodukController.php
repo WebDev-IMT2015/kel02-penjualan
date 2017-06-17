@@ -68,17 +68,19 @@ class IncomingprodukController extends Controller
             Incomingproduk::create($requestData);
             Session::flash('flash_message', 'Incomingproduk added!');
 
-            return redirect('gudang/incomingproduk');
+            $sukses = "Sukses menambah barang".$request->input('kode');
+
+            return redirect('gudang/incomingproduk')->with('sukses', $sukses);
         } elseif ($produks==null && $request->jumlah>0){
             $salah1 = "Kode barang tidak ditemukan.";
-            return view('gudang/incomingproduk/create')->with('salah1', $salah1);
+            return redirect('gudang/incomingproduk/create')->with('salah1', $salah1);
         } elseif ($produks!=null && $request->jumlah<=0){
             $salah1 = "Jumlah barang yang diinputkan negatif atau 0. Mohon memasukkan jumlah barang masuk positif.";
-            return view('gudang/incomingproduk/create')->with('salah1', $salah1);
+            return redirect('gudang/incomingproduk/create')->with('salah1', $salah1);
         } else {
             $salah1 = "Kode barang tidak ditemukan.";
             $salah2 = "Jumlah barang yang diinputkan negatif atau 0. Mohon memasukkan jumlah barang masuk positif.";
-            return view('gudang/incomingproduk/create')->with('salah1', $salah1)->with('salah2', $salah2);
+            return redirect('gudang/incomingproduk/create')->with('salah1', $salah1)->with('salah2', $salah2);
         }
 
     }

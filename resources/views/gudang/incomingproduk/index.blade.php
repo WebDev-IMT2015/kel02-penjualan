@@ -8,6 +8,12 @@
             <div class="col-md-9">
                 <div class="panel panel-default">
                     <div class="panel-heading">Incomingproduk</div>
+
+                    @if (session('sukses'))
+                        <div class="alert alert-success">
+                            {{ session('sukses') }}
+                        </div>
+                    @endif
                     <div class="panel-body">
                         <a href="{{ url('/gudang/incomingproduk/create') }}" class="btn btn-success btn-sm" title="Add New Incomingproduk">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New

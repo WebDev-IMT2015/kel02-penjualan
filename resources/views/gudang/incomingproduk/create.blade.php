@@ -21,13 +21,19 @@
                             </ul>
                         @endif
 
-                        @if (isset($salah1) || isset($salah2))
+                        @if (session('sukses'))
+                        <div class="alert alert-success">
+                            {{ session('sukses') }}
+                        </div>
+                    @endif
+
+                        @if (session('salah1') || session('salah2'))
                             <ul class="alert alert-danger">
-                                @if(isset($salah1))
-                                    <li>{{ $salah1 }}</li>
+                                @if(session('salah1'))
+                                    <li>{{ session('salah1') }}</li>
                                 @endif
-                                @if(isset($salah2))
-                                    <li>{{ $salah2 }}</li>
+                                @if(session('salah2'))
+                                    <li>{{ session('salah2') }}</li>
                                 @endif
                             </ul>
                         @endif
