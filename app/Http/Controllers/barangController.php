@@ -43,9 +43,9 @@ class barangController extends Controller
         $barangs = barang::where('kodebarang', $kodebarang)->first();
         if ($barangs!=null) {
             //tambah stock
-            $barangs->jumlah = $barangs->jumlah + $request->input('jumlah');
-            $barangs->save();
-            //masukin ke database barangmasuk
+            $barangs->jumlah = ();
+            $barangs->jumlah + $request->input('jumlah');
+            $barangs->save            //masukin ke database barangmasuk
             //insert code here...
             return view('gudang/barangmasuk');
         }

@@ -35,3 +35,6 @@ Route::post('inputbarang', 'barangController@store');
 Route::post('barangmasuk', 'barangController@addStock');
 Route::post('penjualan/cek', 'barangController@cek')->name('cek');
 Route::post('penjualan', 'barangController@jual')->name('jual');
+
+Route::resource('admin/produk', 'Admin\\ProdukController');
+Route::resource('gudang/incomingproduk', 'Gudang\\IncomingprodukController');
