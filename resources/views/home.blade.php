@@ -9,6 +9,15 @@
 
                 <div class="panel-body">
                     You are logged in!
+
+                    @if(Auth::user()->usertype == 'admin')
+                        a
+                    @elseif(Auth::user()->usertype == 'gudang')
+                        b
+                    @elseif(Auth::user()->usertype == 'kasir')
+                        c
+                    @endif
+
                 </div>
             </div>
         </div>
