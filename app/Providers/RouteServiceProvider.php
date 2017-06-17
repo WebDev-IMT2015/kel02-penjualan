@@ -39,70 +39,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        $this->mapGudangRoutes();
-
-        $this->mapKasirRoutes();
-
-        $this->mapAdminRoutes();
-
         //
-    }
-
-    /**
-     * Define the "admin" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
-    protected function mapAdminRoutes()
-    {
-        Route::group([
-            'middleware' => ['web', 'admin', 'auth:admin'],
-            'prefix' => 'admin',
-            'as' => 'admin.',
-            'namespace' => $this->namespace,
-        ], function ($router) {
-            require base_path('routes/admin.php');
-        });
-    }
-
-    /**
-     * Define the "kasir" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
-    protected function mapKasirRoutes()
-    {
-        Route::group([
-            'middleware' => ['web', 'kasir', 'auth:kasir'],
-            'prefix' => 'kasir',
-            'as' => 'kasir.',
-            'namespace' => $this->namespace,
-        ], function ($router) {
-            require base_path('routes/kasir.php');
-        });
-    }
-
-    /**
-     * Define the "gudang" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
-    protected function mapGudangRoutes()
-    {
-        Route::group([
-            'middleware' => ['web', 'gudang', 'auth:gudang'],
-            'prefix' => 'gudang',
-            'as' => 'gudang.',
-            'namespace' => $this->namespace,
-        ], function ($router) {
-            require base_path('routes/gudang.php');
-        });
     }
 
     /**

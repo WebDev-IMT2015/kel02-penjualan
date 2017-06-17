@@ -36,21 +36,6 @@ return [
     */
 
     'guards' => [
-        'gudang' => [
-            'driver' => 'session',
-            'provider' => 'gudangs',
-        ],
-
-        'kasir' => [
-            'driver' => 'session',
-            'provider' => 'kasirs',
-        ],
-
-        'admin' => [
-            'driver' => 'session',
-            'provider' => 'admins',
-        ],
-
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
@@ -80,21 +65,6 @@ return [
     */
 
     'providers' => [
-        'gudangs' => [
-            'driver' => 'eloquent',
-            'model' => App\Gudang::class,
-        ],
-
-        'kasirs' => [
-            'driver' => 'eloquent',
-            'model' => App\Kasir::class,
-        ],
-
-        'admins' => [
-            'driver' => 'eloquent',
-            'model' => App\Admin::class,
-        ],
-
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
@@ -122,24 +92,6 @@ return [
     */
 
     'passwords' => [
-        'gudangs' => [
-            'provider' => 'gudangs',
-            'table' => 'gudang_password_resets',
-            'expire' => 60,
-        ],
-
-        'kasirs' => [
-            'provider' => 'kasirs',
-            'table' => 'kasir_password_resets',
-            'expire' => 60,
-        ],
-
-        'admins' => [
-            'provider' => 'admins',
-            'table' => 'admin_password_resets',
-            'expire' => 60,
-        ],
-
         'users' => [
             'provider' => 'users',
             'table' => 'password_resets',

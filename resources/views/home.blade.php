@@ -1,4 +1,4 @@
-@extends('kasir.layout.auth')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
@@ -8,7 +8,7 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in as Kasir!
+                    You are logged in!
                 </div>
             </div>
         </div>
