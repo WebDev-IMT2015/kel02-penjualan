@@ -36,6 +36,16 @@ Route::post('barangmasuk', 'barangController@addStock');
 Route::post('penjualan/cek', 'barangController@cek')->name('cek');
 Route::post('penjualan', 'barangController@jual')->name('jual');
 
+
+Route::get('admin', function () {
+	return view('admin/dashboard');
+});
+Route::get('gudang', function () {
+	return view('gudang/dashboard');
+});
+Route::get('kasir', function () {
+	return view('kasir/dashboard');
+});
 Route::resource('admin/produk', 'Admin\\ProdukController');
 Route::resource('gudang/incomingproduk', 'Gudang\\IncomingprodukController');
 Route::resource('kasir/invoice', 'Kasir\\InvoiceController');

@@ -7,18 +7,13 @@
         <div class="panel-body">
             <ul class="nav" role="tablist">
                 <li role="presentation">
-                    <a href="{{ url('/admin') }}">
+                    <a href="{{ url('/kasir') }}">
                         Dashboard
                     </a>
                 </li>
                 <li role="presentation">
-                    <a href="{{ url('/admin/produk') }}">
-                        Produk
-                    </a>
-                </li>
-                <li role="presentation">
-                    <a href="{{ url('/admin/history') }}">
-                        History Penjualan
+                    <a href="{{ url('/kasir/invoice') }}">
+                        Invoice
                     </a>
                 </li>
             </ul>
