@@ -4,11 +4,28 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class invoice extends Model
+class Invoice extends Model
 {
-    public $table = "invoice";
-	    
-    protected $filable = [
-        'kodeinvoice','nama','tanggal','kodebarang','jumlah'
-    ];
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'invoices';
+
+    /**
+    * The database primary key value.
+    *
+    * @var string
+    */
+    protected $primaryKey = 'id';
+
+    /**
+     * Attributes that should be mass-assignable.
+     *
+     * @var array
+     */
+    protected $fillable = ['customer', 'tanggal', 'belanjaan', 'jumlah'];
+
+    
 }
