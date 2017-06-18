@@ -39,3 +39,4 @@ Route::post('penjualan', 'barangController@jual')->name('jual');
 Route::resource('admin/produk', 'Admin\\ProdukController');
 Route::resource('gudang/incomingproduk', 'Gudang\\IncomingprodukController');
 Route::resource('kasir/invoice', 'Kasir\\InvoiceController');
+Route::resource('admin/history', 'Admin\\HistoryController');
