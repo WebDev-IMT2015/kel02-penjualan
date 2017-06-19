@@ -39,13 +39,13 @@ Route::post('penjualan', 'barangController@jual')->name('jual');
 
 Route::get('admin', function () {
 	return view('admin/dashboard');
-});
+})->middleware('auth');
 Route::get('gudang', function () {
 	return view('gudang/dashboard');
-});
+})->middleware('auth');
 Route::get('kasir', function () {
 	return view('kasir/dashboard');
-});
+})->middleware('auth');
 Route::resource('admin/produk', 'Admin\\ProdukController');
 Route::resource('gudang/incomingproduk', 'Gudang\\IncomingprodukController');
 Route::resource('kasir/invoice', 'Kasir\\InvoiceController');

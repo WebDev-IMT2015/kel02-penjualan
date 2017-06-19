@@ -13,6 +13,10 @@ use Session;
 
 class HistoryController extends Controller
 {
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
     /**
      * Display a listing of the resource.
      *
@@ -55,9 +59,9 @@ class HistoryController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         // $requestData = $request->all();
-        
+
         // History::create($requestData);
 
         // Session::flash('flash_message', 'History added!');
@@ -68,7 +72,7 @@ class HistoryController extends Controller
         if ($produks!=null) {
             // return view('kasir/penjualan')->with('barangs', $barangs);
             $requestData = $request->all();
-            
+
             Invoice::create($requestData);
 
             Session::flash('flash_message', 'Invoice added!');
@@ -119,9 +123,9 @@ class HistoryController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+
         $requestData = $request->all();
-        
+
         $history = Invoice::findOrFail($id);
         $history->update($requestData);
 

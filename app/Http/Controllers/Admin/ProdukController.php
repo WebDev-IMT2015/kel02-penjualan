@@ -11,6 +11,11 @@ use Session;
 
 class ProdukController extends Controller
 {
+
+  public function __construct()
+  {
+      $this->middleware('auth');
+  }
     /**
      * Display a listing of the resource.
      *
@@ -53,9 +58,9 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $requestData = $request->all();
-        
+
         Produk::create($requestData);
 
         Session::flash('flash_message', 'Produk added!');
@@ -101,9 +106,9 @@ class ProdukController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+
         $requestData = $request->all();
-        
+
         $produk = Produk::findOrFail($id);
         $produk->update($requestData);
 
