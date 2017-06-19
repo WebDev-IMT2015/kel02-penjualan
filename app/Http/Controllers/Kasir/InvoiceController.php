@@ -17,6 +17,12 @@ class InvoiceController extends Controller
      *
      * @return \Illuminate\View\View
      */
+     
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
+
     public function index(Request $request)
     {
         $keyword = $request->get('search');
@@ -59,7 +65,7 @@ class InvoiceController extends Controller
         if ($produks!=null) {
             // return view('kasir/penjualan')->with('barangs', $barangs);
             $requestData = $request->all();
-            
+
             Invoice::create($requestData);
 
             Session::flash('flash_message', 'Invoice added!');
@@ -111,9 +117,9 @@ class InvoiceController extends Controller
      */
     public function update($id, Request $request)
     {
-        
+
         $requestData = $request->all();
-        
+
         $invoice = Invoice::findOrFail($id);
         $invoice->update($requestData);
 
