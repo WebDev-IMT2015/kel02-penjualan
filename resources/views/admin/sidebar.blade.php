@@ -21,6 +21,11 @@
                         History Penjualan
                     </a>
                 </li>
+                <li role="presentation">
+                    <a href="{{ url('/admin/account') }}">
+                        Manage User
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
