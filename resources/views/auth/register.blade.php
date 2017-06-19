@@ -14,9 +14,9 @@
                             <label for="usertype" class="col-md-4 control-label">User Type</label>
                             <div class="col-md-6">
                                 <select name="usertype" class="form-control" required>
-                                  <option value="admin">Admin</option>
-                                  <option value="gudang">Gudang</option>
-                                  <option value="kasir">Kasir</option>
+                                  <option value="0">Admin</option>
+                                  <option value="1">Gudang</option>
+                                  <option value="2">Kasir</option>
                               </select>
                           </div>
                       </div>
