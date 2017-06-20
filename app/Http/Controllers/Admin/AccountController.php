@@ -16,19 +16,16 @@ class AccountController extends Controller
      *
      * @return \Illuminate\View\View
      */
-<<<<<<< HEAD
-=======
+
      public function __construct()
      {
          $this->middleware('auth');
      }
->>>>>>> 489ccfe3cd3852430b10b9106014deaed679a2bc
     public function index(Request $request)
     {
         $keyword = $request->get('search');
         $perPage = 25;
 
-<<<<<<< HEAD
         if (!empty($keyword)) {
             $account = Account::where('name', 'LIKE', "%$keyword%")
             ->orWhere('email', 'LIKE', "%$keyword%")
@@ -40,7 +37,6 @@ class AccountController extends Controller
         }
 
         return view('admin.account.index', compact('account'));
-=======
 
           if (!empty($keyword)) {
               $account = Account::where('name', 'LIKE', "%$keyword%")
@@ -53,7 +49,6 @@ class AccountController extends Controller
           }
           return view('admin.account.index', compact('account'));
 
->>>>>>> 489ccfe3cd3852430b10b9106014deaed679a2bc
     }
 
     /**
@@ -130,11 +125,7 @@ class AccountController extends Controller
 
         $requestData = $request->all();
         $requestData['password']=bcrypt($requestData['password']);
-<<<<<<< HEAD
         
-=======
-
->>>>>>> 489ccfe3cd3852430b10b9106014deaed679a2bc
         $account = Account::findOrFail($id);
         $account->update($requestData);
 
