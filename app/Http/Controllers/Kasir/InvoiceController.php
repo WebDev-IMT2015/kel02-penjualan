@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 
 use App\Invoice;
 use App\Produk;
+use App\Order;
+use App\OrderDetail;
 use Illuminate\Http\Request;
 use Session;
 
@@ -48,7 +50,8 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        return view('kasir.invoice.create');
+        $products = Produk::all();
+        return view('kasir.invoice.invoicedesperate')->with('products', $products);
     }
 
     /**
@@ -60,6 +63,22 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
+        // $namaprodukinput = $request->input('belanjaan');
+        // $produks = Produk::where('kode', $namaprodukinput)->first();
+        // if ($produks!=null) {
+
+        //     $requestData = $request->all();
+
+        //     Invoice::create($requestData);
+
+        //     Session::flash('flash_message', 'Invoice added!');
+
+        //     return redirect('kasir/invoice');
+        // }
+        // else {
+        //     $salah1 = "Barang tidak ditemukan.";
+        //     return redirect('kasir/invoice/create')->with('salah1', $salah1);
+        // }
         $namaprodukinput = $request->input('belanjaan');
         $produks = Produk::where('kode', $namaprodukinput)->first();
         if ($produks!=null) {
