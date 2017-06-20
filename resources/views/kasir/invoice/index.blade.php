@@ -30,17 +30,17 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th>Customer</th><th>Tanggal</th><th>Belanjaan</th><th>Actions</th>
+                                        <th>ID</th><th>Customer</th><th>Tanggal</th>{{-- <th>Belanjaan</th> --}}<th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($invoice as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td>{{ $item->customer }}</td><td>{{ $item->tanggal }}</td><td>{{ $item->belanjaan }}</td>
+                                        <td>{{ $item->customer }}</td><td>{{ $item->tanggal }}</td>{{-- <td>{{ $item->belanjaan }}</td> --}}
                                         <td>
                                             <a href="{{ url('/kasir/invoice/' . $item->id) }}" title="View Invoice"><button class="btn btn-info btn-xs"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/kasir/invoice/' . $item->id . '/edit') }}" title="Edit Invoice"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                            {{-- <a href="{{ url('/kasir/invoice/' . $item->id . '/edit') }}" title="Edit Invoice"><button class="btn btn-primary btn-xs"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a> --}}
                                             {!! Form::open([
                                                 'method'=>'DELETE',
                                                 'url' => ['/kasir/invoice', $item->id],

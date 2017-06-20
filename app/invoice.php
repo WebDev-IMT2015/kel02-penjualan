@@ -25,7 +25,7 @@ class Invoice extends Model
      *
      * @var array
      */
-    protected $fillable = ['customer', 'tanggal', 'belanjaan', 'jumlah'];
+    protected $fillable = ['customer', 'tanggal'];
 
     
 }

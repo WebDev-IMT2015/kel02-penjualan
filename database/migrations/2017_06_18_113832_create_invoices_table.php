@@ -16,8 +16,8 @@ class CreateInvoicesTable extends Migration
             $table->increments('id');
             $table->string('customer');
             $table->dateTime('tanggal');
-            $table->string('belanjaan');
-            $table->integer('jumlah');
+            // $table->string('belanjaan');
+            // $table->integer('jumlah');
             $table->timestamps();
         });
     }

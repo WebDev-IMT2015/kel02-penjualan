@@ -21,7 +21,7 @@
 			email ') }}"></td>' +
 			'<td><input type="text" class="price form-control" name="price[]" value="{{ old('
 			email ') }}"></td>' +
-			'<td style="display: none;"><input type="text" class="dis form-control" name="dis[]"></td>' +
+			'<td style="display: none;"><input type="text" class="dis form-control" name="dis[]" value="0"></td>' +
 			'<td><input type="text" class="amount form-control" name="amount[]"></td>' +
 			'<td><input type="button" class="btn btn-danger delete" value="x"></td></tr>';
 			$('.neworderbody').append(tr);
@@ -128,16 +128,16 @@
 										</select>
 									</td>
 									<td>
-										<input type="text" class="qty form-control" name="jumlah[]" value="">
+										<input type="text" class="qty form-control" name="qty[]" value="">
 									</td>
 									<td>
-										<input type="text" class="price form-control" name="harga[]" value="">
+										<input type="text" class="price form-control" name="price[]" value="">
 									</td>
 									<td class="hidden">
-										<input type="text" class="dis form-control" name="dis[]">
+										<input type="text" class="dis form-control" name="dis[]" value="0">
 									</td>
 									<td>
-										<input type="text" class="amount form-control" name="subtotal[]">
+										<input type="text" class="amount form-control" name="amount[]">
 									</td>
 									<td>
 										<input type="button" class="btn btn-danger delete" value="x">
@@ -157,6 +157,17 @@
 						<hr>
 
 
+						<div class="col-md-12">
+							<div class="panel panel-default">
+								<div class="panel-heading">Actions</div>
+
+								<div class="panel-body">
+									<center><input type="submit" class="btn btn-default btn-lg" name="save" value="Place Order">  
+									</center>
+								</div>
+							</div>
+						</div>
+					</form>
 
 					</div>
 
@@ -164,18 +175,7 @@
 			</div>
 			<!--  Right -->
 
-			<div class="col-md-9 col-md-offset-3">
-				<div class="panel panel-default">
-					<div class="panel-heading">Actions</div>
-
-					<div class="panel-body">
-						<center><input type="submit" class="btn btn-default btn-lg" name="save" value="Place Order">  
-					</center>
-				</div>
-			</div>
-		</div>
-	</form>
-</div>
+	</div>
 
 </div>
 

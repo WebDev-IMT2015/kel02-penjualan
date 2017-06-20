@@ -7,9 +7,9 @@ use App\Http\Controllers\Controller;
 
 use App\Invoice;
 use App\Produk;
-use App\Order;
 use App\OrderDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use Session;
 
 class InvoiceController extends Controller
@@ -79,22 +79,30 @@ class InvoiceController extends Controller
         //     $salah1 = "Barang tidak ditemukan.";
         //     return redirect('kasir/invoice/create')->with('salah1', $salah1);
         // }
-        $namaprodukinput = $request->input('belanjaan');
-        $produks = Produk::where('kode', $namaprodukinput)->first();
-        if ($produks!=null) {
-            // return view('kasir/penjualan')->with('barangs', $barangs);
-            $requestData = $request->all();
-
-            Invoice::create($requestData);
-
-            Session::flash('flash_message', 'Invoice added!');
-
-            return redirect('kasir/invoice');
+        $order = new Invoice;
+        $input = Input::all();
+        $order->customer = Input::get('nama');
+        $order->tanggal = Input::get('tanggal');
+        $order->save();
+        echo count($input['product_id']);
+        $j = $order->id;
+        if($j > 0){
+            for($id = 0; $id < count($input['product_id']); $id++){
+                echo $input['qty'][$id];
+                $orderdetails = new OrderDetail;
+                $orderdetails->order_id = $j;
+                $orderdetails->product_id = $input['product_id'][$id];
+                $orderdetails->quantity = $input['qty'][$id];
+                $orderdetails->unitprice = $input['price'][$id];
+                $orderdetails->discount = $input['dis'][$id];
+                $orderdetails->amount = $input['amount'][$id];
+                $orderdetails->save();
+            }
+            
         }
-        else {
-            $salah1 = "Barang tidak ditemukan.";
-            return redirect('kasir/invoice/create')->with('salah1', $salah1);
-        }
+        Session::flash('flash_message', 'Invoice added!');
+
+        return redirect('kasir/invoice');
 
     }
 
