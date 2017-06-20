@@ -16,22 +16,27 @@ class AccountController extends Controller
      *
      * @return \Illuminate\View\View
      */
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
     public function index(Request $request)
     {
         $keyword = $request->get('search');
         $perPage = 25;
 
-        if (!empty($keyword)) {
-            $account = Account::where('name', 'LIKE', "%$keyword%")
-            ->orWhere('email', 'LIKE', "%$keyword%")
-            ->orWhere('password', 'LIKE', "%$keyword%")
-            ->orWhere('usertype', 'LIKE', "%$keyword%")
-            ->paginate($perPage);
-        } else {
-            $account = Account::paginate($perPage);
-        }
 
-        return view('admin.account.index', compact('account'));
+          if (!empty($keyword)) {
+              $account = Account::where('name', 'LIKE', "%$keyword%")
+              ->orWhere('email', 'LIKE', "%$keyword%")
+              ->orWhere('password', 'LIKE', "%$keyword%")
+              ->orWhere('usertype', 'LIKE', "%$keyword%")
+              ->paginate($perPage);
+          } else {
+              $account = Account::paginate($perPage);
+          }
+          return view('admin.account.index', compact('account'));
+
     }
 
     /**
@@ -108,7 +113,7 @@ class AccountController extends Controller
 
         $requestData = $request->all();
         $requestData['password']=bcrypt($requestData['password']);
-        
+
         $account = Account::findOrFail($id);
         $account->update($requestData);
 

@@ -8,8 +8,13 @@ use App\invoice;
 
 class barangController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
-    {        
+    {
         $barang = barang::all();
         return view('inputbarang')->with('barang', $barang);
     }
@@ -27,7 +32,7 @@ class barangController extends Controller
         $barang->jumlah = $jumlah;
         $barang->harga = $harga;
         $barang->save();
-        
+
         return redirect('inputbarang');
     }
 
@@ -82,7 +87,7 @@ class barangController extends Controller
         $invoice->kodebarang = $kodebarang;
         $invoice->jumlah = $jumlah;
         $invoice->save();
-        
+
         return view('kasir/penjualan');
     }
 }

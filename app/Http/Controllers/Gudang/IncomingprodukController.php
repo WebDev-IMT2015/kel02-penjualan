@@ -17,6 +17,11 @@ class IncomingprodukController extends Controller
      *
      * @return \Illuminate\View\View
      */
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
+
     public function index(Request $request)
     {
         $keyword = $request->get('search');
@@ -125,7 +130,7 @@ class IncomingprodukController extends Controller
     {
 
         $requestData = $request->all();
-        
+
         $incomingproduk = Incomingproduk::findOrFail($id);
         $incomingproduk->update($requestData);
 
