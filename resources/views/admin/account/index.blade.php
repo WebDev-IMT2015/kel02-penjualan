@@ -13,6 +13,14 @@
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
 
+                        @if (session('salah1'))
+                            <ul class="alert alert-danger">
+                                @if(session('salah1'))
+                                    <li>{{ session('salah1') }}</li>
+                                @endif
+                            </ul>
+                        @endif
+
                         {!! Form::open(['method' => 'GET', 'url' => '/admin/account', 'class' => 'navbar-form navbar-right', 'role' => 'search'])  !!}
                         <div class="input-group">
                             <input type="text" class="form-control" name="search" placeholder="Search...">

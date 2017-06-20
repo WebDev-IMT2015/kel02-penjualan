@@ -17,39 +17,39 @@ class AccountController extends Controller
      * @return \Illuminate\View\View
      */
 
-     public function __construct()
-     {
-         $this->middleware('auth');
-     }
-    public function index(Request $request)
+    public function __construct()
     {
-        $keyword = $request->get('search');
-        $perPage = 25;
+     $this->middleware('auth');
+ }
+ public function index(Request $request)
+ {
+    $keyword = $request->get('search');
+    $perPage = 25;
 
-        if (!empty($keyword)) {
-            $account = Account::where('name', 'LIKE', "%$keyword%")
-            ->orWhere('email', 'LIKE', "%$keyword%")
-            ->orWhere('password', 'LIKE', "%$keyword%")
-            ->orWhere('usertype', 'LIKE', "%$keyword%")
-            ->paginate($perPage);
-        } else {
-            $account = Account::paginate($perPage);
-        }
-
-        return view('admin.account.index', compact('account'));
-
-          if (!empty($keyword)) {
-              $account = Account::where('name', 'LIKE', "%$keyword%")
-              ->orWhere('email', 'LIKE', "%$keyword%")
-              ->orWhere('password', 'LIKE', "%$keyword%")
-              ->orWhere('usertype', 'LIKE', "%$keyword%")
-              ->paginate($perPage);
-          } else {
-              $account = Account::paginate($perPage);
-          }
-          return view('admin.account.index', compact('account'));
-
+    if (!empty($keyword)) {
+        $account = Account::where('name', 'LIKE', "%$keyword%")
+        ->orWhere('email', 'LIKE', "%$keyword%")
+        ->orWhere('password', 'LIKE', "%$keyword%")
+        ->orWhere('usertype', 'LIKE', "%$keyword%")
+        ->paginate($perPage);
+    } else {
+        $account = Account::paginate($perPage);
     }
+
+    return view('admin.account.index', compact('account'));
+
+    if (!empty($keyword)) {
+      $account = Account::where('name', 'LIKE', "%$keyword%")
+      ->orWhere('email', 'LIKE', "%$keyword%")
+      ->orWhere('password', 'LIKE', "%$keyword%")
+      ->orWhere('usertype', 'LIKE', "%$keyword%")
+      ->paginate($perPage);
+  } else {
+      $account = Account::paginate($perPage);
+  }
+  return view('admin.account.index', compact('account'));
+
+}
 
     /**
      * Show the form for creating a new resource.
@@ -71,17 +71,28 @@ class AccountController extends Controller
     public function store(Request $request)
     {
 
-        $requestData = $request->all();
-        Account::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => bcrypt($request['password']),
-            'usertype' => $request['usertype'],
-            ]);
+        $akun = Account::all();
+        $email = $request->input('email');
+        $akuns = Account::where('email', $email)->first();
+        if ($akuns==null) {
+            $requestData = $request->all();
+            Account::create([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'password' => bcrypt($request['password']),
+                'usertype' => $request['usertype'],
+                ]);
 
-        Session::flash('flash_message', 'Account added!');
+            Session::flash('flash_message', 'Account added!');
 
-        return redirect('admin/account');
+            return redirect('admin/account');
+        } else {
+            $salah1 = "Email sudah ter register. Silakan gunakan email lain.";
+            return redirect('admin/account')->with('salah1', $salah1);
+        }
+
+
+        
     }
 
     /**
